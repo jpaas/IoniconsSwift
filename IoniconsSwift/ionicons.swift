@@ -19,9 +19,9 @@ private func load(){
 	loaded = true
     let inData = NSData(contentsOfFile: NSBundle(identifier: "com.oncast.IoniconsSwift")!.pathForResource("ionicons", ofType: "ttf")!)
 	var error : Unmanaged<CFError>?
-	let provider = CGDataProviderCreateWithCFData(inData)
-	let font = CGFontCreateWithDataProvider(provider)
-	if !CTFontManagerRegisterGraphicsFont(font!, &error) {
+	let provider = CGDataProviderCreateWithCFData(inData!)
+	let font = CGFontCreateWithDataProvider(provider!)
+	if !CTFontManagerRegisterGraphicsFont(font, &error) {
 		let errorDescription = CFErrorCopyDescription(error!.takeRetainedValue())
 		NSLog("Failed to load font: %@", errorDescription as String);
 	}
@@ -45,7 +45,7 @@ public enum Ionicons : UInt16, CustomStringConvertible {
 		label.layer.renderInContext(UIGraphicsGetCurrentContext()!)
 		let image = UIGraphicsGetImageFromCurrentImageContext()
 		UIGraphicsEndImageContext();
-		return image
+		return image!
 	}
     public var description : String {
         return String(UnicodeScalar(rawValue))
